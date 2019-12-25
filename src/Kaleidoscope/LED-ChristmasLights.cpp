@@ -56,7 +56,6 @@ void LEDChristmasLights::update(void) {
     for (byte c = 0; c < COLS; c++) {
       uint8_t offset = (r*COLS) + c;
       uint8_t key = pgm_read_byte(rc2pos+offset);
-      // int RandIndex = rand() % 4;
       ::LEDControl.setCrgbAt(r, c, colors[rand() % 4]);
     }
   }
