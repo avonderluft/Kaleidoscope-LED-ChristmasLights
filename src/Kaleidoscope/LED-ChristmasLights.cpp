@@ -48,9 +48,9 @@ void LEDChristmasLights::update(void) {
     return;
   }
   
-  constexpr cRGB red = CRGB(201, 0, 0);
-  constexpr cRGB blue = CRGB(0, 0, 201);
-  constexpr cRGB green = CRGB(0, 201, 0);
+  constexpr cRGB red = CRGB(221, 0, 0);
+  constexpr cRGB blue = CRGB(0, 0, 221);
+  constexpr cRGB green = CRGB(0, 221, 0);
   constexpr cRGB yellow = CRGB(201, 201, 0);
   
   for (byte r = 0; r < ROWS; r++) {
