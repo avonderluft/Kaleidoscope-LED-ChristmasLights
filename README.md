@@ -21,8 +21,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
 );
 
 void setup() {
-  // Optional setting for blink delay in ms.  Default 500
-  LEDChristmasLights.blink_delay = 900;
+  // Optional setting for blink delay in ms.  Default 1000
+  LEDChristmasLights.blink_delay = 700;
   
 ```
 

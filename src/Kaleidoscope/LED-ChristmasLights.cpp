@@ -20,7 +20,7 @@
 
 namespace kaleidoscope { namespace plugin {
 
-uint16_t LEDChristmasLights::blink_delay = 500;
+uint16_t LEDChristmasLights::blink_delay = 1000; // default 1s
 
 // map native keyboard coordinates (16x4) into geometric space (14x5)
 PROGMEM const uint8_t LEDChristmasLights::rc2pos[ROWS*COLS] = {
@@ -39,16 +39,16 @@ constexpr cRGB yellow = CRGB(201, 201, 0);
 cRGB colors[4] = {red, blue, green, yellow};
 
 void LEDChristmasLights::update(void) {
-  
+
   // limit the blink rate
   static uint8_t prev_time = 0;
   uint8_t now = Kaleidoscope.millisAtCycleStart() / blink_delay;
+  if (rand() % 3 == 1) {
+    ::LEDControl.setCrgbAt(rand() % 5, rand() % 14, white);
+  }
   if (now != prev_time) {
     prev_time = now;
   } else {
-    if (now % 2 == 0) {
-      ::LEDControl.setCrgbAt(rand() % 5, rand() % 14, white);
-    }
     return;
   }
   
