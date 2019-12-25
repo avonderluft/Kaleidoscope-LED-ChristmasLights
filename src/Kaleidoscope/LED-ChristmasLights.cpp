@@ -32,19 +32,26 @@ PROGMEM const uint8_t LEDChristmasLights::rc2pos[ROWS*COLS] = {
 
 void LEDChristmasLights::update(void) {
   
+  constexpr cRGB white = CRGB(211, 211, 211);
+  
   // limit the blink rate
   static uint8_t prev_time = 0;
   uint8_t now = Kaleidoscope.millisAtCycleStart() / blink_delay;
   if (now != prev_time) {
-      prev_time = now;
+    prev_time = now;
   } else {
-      return;
+    if (now % 2 == 0) {
+      int randRow = rand() % 5;
+      int randCol = rand() % 14;
+      ::LEDControl.setCrgbAt(randRow, randCol, white);
+    }
+    return;
   }
   
   constexpr cRGB red = CRGB(201, 0, 0);
   constexpr cRGB blue = CRGB(0, 0, 201);
   constexpr cRGB green = CRGB(0, 201, 0);
-  constexpr cRGB yellow = CRGB(201, 100, 0);
+  constexpr cRGB yellow = CRGB(201, 201, 0);
   
   for (byte r = 0; r < ROWS; r++) {
     for (byte c = 0; c < COLS; c++) {
