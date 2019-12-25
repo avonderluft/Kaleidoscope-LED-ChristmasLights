@@ -30,9 +30,15 @@ PROGMEM const uint8_t LEDChristmasLights::rc2pos[ROWS*COLS] = {
     42, 43, 44, 45, 46, 47,     58,62, 63,67,    50, 51, 52, 53, 54, 55,
 };
 
+constexpr cRGB white = CRGB(211, 211, 211);
+constexpr cRGB red = CRGB(221, 0, 0);
+constexpr cRGB blue = CRGB(0, 0, 221);
+constexpr cRGB green = CRGB(0, 221, 0);
+constexpr cRGB yellow = CRGB(201, 201, 0);
+
+cRGB colors[4] = {red, blue, green, yellow};
+
 void LEDChristmasLights::update(void) {
-  
-  constexpr cRGB white = CRGB(211, 211, 211);
   
   // limit the blink rate
   static uint8_t prev_time = 0;
@@ -41,25 +47,17 @@ void LEDChristmasLights::update(void) {
     prev_time = now;
   } else {
     if (now % 2 == 0) {
-      int randRow = rand() % 5;
-      int randCol = rand() % 14;
-      ::LEDControl.setCrgbAt(randRow, randCol, white);
+      ::LEDControl.setCrgbAt(rand() % 5, rand() % 14, white);
     }
     return;
   }
-  
-  constexpr cRGB red = CRGB(221, 0, 0);
-  constexpr cRGB blue = CRGB(0, 0, 221);
-  constexpr cRGB green = CRGB(0, 221, 0);
-  constexpr cRGB yellow = CRGB(201, 201, 0);
   
   for (byte r = 0; r < ROWS; r++) {
     for (byte c = 0; c < COLS; c++) {
       uint8_t offset = (r*COLS) + c;
       uint8_t key = pgm_read_byte(rc2pos+offset);
-      cRGB colors[4] = {red, blue, green, yellow};
-      int RandIndex = rand() % 4;
-      ::LEDControl.setCrgbAt(r, c, colors[RandIndex]);
+      // int RandIndex = rand() % 4;
+      ::LEDControl.setCrgbAt(r, c, colors[rand() % 4]);
     }
   }
 }
